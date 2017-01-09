@@ -1,36 +1,41 @@
 # introduce_parameter_object.rb
 #http://refactoring.com/catalog/introduceParameterObject.html
 
-class ShippingCalculator
-	EXPRESS_CONVERSION_FACTOR = 3.33
-	EXPRESS_RATE = 4.25
-	NORMAL_CONVERSION_FACTOR = 6.67
-	NORMAL_RATE = 2.75
+class GamePackageCalculator
 
-	def calculate_cost(height, length, weight, width, express=nil)
-		volume = find_volume(height, length, width)
+	BASIC_PACKAGE_FACTOR = 1.0
+	PREMIUM_PACKAGE_FACTOR = 2.1
+	BASIC_RATE = 1
+	PREMIUM_RATES = 2
+	GOLD_LIFE_RATIO = 0.2
+	POWERUPS_LIFE_RATIO = 0.5
 
-		if express
-			express_shipping(volume, weight)
+
+	#calculates the cost of a gamer who wants to get X gold, Y powerup and number of lives derived from X gold and Y powerup. 
+	def calculate_cost(gold, powerups, premium = nil)
+
+		lives = calculate_lives(gold, powerups) 
+		
+		if premium
+			premium_cost(lives, gold, powerups) 
 		else
-			normal_shipping(volume, weight)
+			basic_cost(lives, gold, powerups)
 		end
+	end	
+
+	private 
+
+	def calculate_lives(gold, powerups)
+		(gold * GOLD_LIFE_RATIO ).round(0) + (powerups * POWERUPS_LIFE_RATIO).round(0) 
 	end
 
-	private
 
-	def find_volume(height, length, width)
-		height * length * width
+	def premium_cost(lives, gold, powerups)
+		PREMIUM_PACKAGE_FACTOR * lives + PREMIUM_RATES * (gold + powerups)
 	end
 
-	def express_shipping(volume, weight)
-		cost = volume * (weight / EXPRESS_CONVERSION_FACTOR) * EXPRESS_RATE
-		cost.round(2)
+	def basic_cost(lives, gold, powerups)
+		BASIC_PACKAGE_FACTOR * lives + BASIC_RATES * (gold + powerups)
 	end
 
-	def normal_shipping(volume, weight)
-		cost = volume * (weight / NORMAL_CONVERSION_FACTOR) * NORMAL_RATE
-		cost.round(2)
-	end
 end
-
