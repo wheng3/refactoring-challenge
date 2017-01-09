@@ -1,42 +1,26 @@
 #extract_method.rb
 #use this as tips for the first one : http://refactoring.com/catalog/extractMethod.html
 
-class ReceiptPrinter
-COST = {
-meat => 5,
-milk => 3,
-candy => 1,
-}
+username = "Alice"
 
-TAX = 0.05
-
-def initialize(output: $stdout, items:)
-@output = output
-@items = items
+if ( username.length > 3 && username.length <= 10 ) || ( username.downcase.start_with?("a, e, i, o, u") )
+	puts "Congratulations #{username}! You won 10 dollars!"
+else
+	puts "Thanks for joining!"
 end
 
-def print
-subtotal = items.reduce(0) do |sum, item|
-item_cost = COST[item]
-output.puts "#{item}: #{sprintf('$%.2f', item_cost)}"
+username = "Bobby"
 
-sum + item_cost.to_i
+if ( username.length > 3 && username.length <= 10 ) || ( username.downcase.start_with?("b, g, l, p") )
+	puts "Congratulations #{username}! You won 50 dollars!"
+else
+	puts "Thanks for joining!"
 end
 
-output.puts divider
-output.puts "subtotal: #{sprintf('$%.2f', subtotal)}"
-output.puts "tax: #{sprintf('$%.2f', subtotal * TAX)}"
-output.puts divider
-output.puts "total: #{sprintf('$%.2f', subtotal + (subtotal * TAX))}"
+username = "Xena"
+
+if ( username.length > 3 && username.length <= 10 ) || ( username.downcase.start_with?("q, u, x, y, z") )
+	puts "Congratulations #{username}! You won 100 dollars!"
+else
+	puts "Thanks for joining!"
 end
-
-private
-
-attr_reader :output, :items
-
-def divider
--' * 13
-end
-end
-
-
