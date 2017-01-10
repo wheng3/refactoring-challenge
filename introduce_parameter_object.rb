@@ -6,7 +6,7 @@ class GamePackageCalculator
 	BASIC_PACKAGE_FACTOR = 1.0
 	PREMIUM_PACKAGE_FACTOR = 2.1
 	BASIC_RATE = 1
-	PREMIUM_RATES = 2
+	PREMIUM_RATE = 2
 	GOLD_LIFE_RATIO = 0.2
 	POWERUPS_LIFE_RATIO = 0.5
 
@@ -31,11 +31,11 @@ class GamePackageCalculator
 
 
 	def premium_cost(lives, gold, powerups)
-		PREMIUM_PACKAGE_FACTOR * lives + PREMIUM_RATES * (gold + powerups)
+		PREMIUM_PACKAGE_FACTOR * lives + PREMIUM_RATE * (gold + powerups)
 	end
 
 	def basic_cost(lives, gold, powerups)
-		BASIC_PACKAGE_FACTOR * lives + BASIC_RATES * (gold + powerups)
+		BASIC_PACKAGE_FACTOR * lives + BASIC_RATE * (gold + powerups)
 	end
 
 end
